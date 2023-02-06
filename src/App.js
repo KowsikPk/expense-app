@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, TextField } from '@mui/material'
-
+import ListExpense from './ListExpense'
 export const App = () => {
     const [allExpense, setExpense] = useState([])
     const [amount, setAmount] = useState(0)
@@ -19,6 +19,7 @@ export const App = () => {
                     setAmount(0)
                 }}
             >Add</Button>
+            <ListExpense />
         </div >
     )
 }
