@@ -4,27 +4,30 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Avatar } from '@mui/material';
 
-export default function DropDown() {
+export default function DropDown(props) {
     const [paymentMode, setPaymentMode] = React.useState('');
     const handleChange = (event) => {
         setPaymentMode(event.target.value);
     };
-    const paymentMethods = ["Paytm", "Gpay", "PhonePe", "Other UPI", "Cash", "Credit Card", "Debit Card", "Other"]
 
     return (
         <Box sx={{ minWidth: 200 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Payment Mode</InputLabel>
+                <InputLabel id="demo-simple-select-label">{props.category}</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={paymentMode}
-                    label="Payment Mode"
+                    label={props.category}
                     onChange={handleChange}
                 >
-                    {paymentMethods.map((method, i) =>
-                        <MenuItem value={i}>{method}</MenuItem>
+                    {props.data.map((method, i) =>
+                        <MenuItem value={i}>
+                            {/* <Avatar style={{ backgroundColor: "red", margin: 5 }}>OP</Avatar> */}
+                            {method}
+                        </MenuItem>
                     )}
                 </Select>
             </FormControl>
