@@ -13,33 +13,31 @@ export default function ListExpense() {
         amount: 200,
         category: "Food",
         date: "Jan 9, 2014",
-        primary: "Photos"
+        primary: "Food"
     },
     {
         amount: 2020,
         category: "Work",
         date: "Jan 9, 2015",
-        primary: "Photos"
+        primary: "Work"
     },
     {
         amount: 130,
         category: "Vacation",
         date: "Jan 9, 2014",
-        primary: "Photos"
+        primary: "Vacation"
     },
     {
         amount: 120,
         category: "Food",
         date: "Jan 9, 2014",
-        primary: "Photos"
+        primary: "Food"
     },
     ]
-
     return (
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {data.map(item => {
+            {data.map(item =>
                 <div>
-                    <h1>some</h1>
                     <ListItem>
                         <ListItemAvatar>
                             <Avatar>
@@ -49,32 +47,7 @@ export default function ListExpense() {
                         <ListItemText primary={item.category} secondary={item.date} />
                     </ListItem>
                 </div>
-            })}
-            {/* 
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar>
-                        <ImageIcon />
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-            </ListItem>
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar>
-                        <WorkIcon />
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="Work" secondary="Jan 7, 2014" />
-            </ListItem>
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar>
-                        <BeachAccessIcon />
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="Vacation" secondary="July 20, 2014" />
-            </ListItem> */}
+            )}
         </List>
     );
 }
