@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import BasicDatePicker from './BasicDatePicker'
 import DropDown from './DropDown'
 import CloseIcon from '@mui/icons-material/Close';
-import data from "../Data"
+import data from "../Data/Data"
 
 export const PopupForm = (props) => {
     const [amount, setAmount] = useState('')
