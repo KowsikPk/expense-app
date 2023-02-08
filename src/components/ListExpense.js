@@ -19,19 +19,19 @@ export default function ListExpense(props) {
             {data.map((item, i) =>
                 <ListItem key={i}>
                     <Accordion
-                        expanded={expanded === 'panel'}
-                        onChange={handleChange('panel')}
+                        expanded={expanded === i}
+                        onChange={handleChange(i)}
                         sx={{ width: 400 }}
                     >
                         <AccordionSummary>
                             <ListItemAvatar>
-                                <IconsList />
+                                <IconsList category={item.category} />
                             </ListItemAvatar>
                             <ListItemText primary={item.category} secondary={item.date} />
                             <div style={{ display: 'flex', flexDirection: 'row', alignSelf: 'center' }}>
                                 <CurrencyRupeeIcon sx={{ fontSize: 20, alignSelf: 'center' }} />
                                 <ListItemText primary={
-                                    <div style={{ fontSize: 20, }}>
+                                    <div style={{ fontSize: 20 }}>
                                         {item.amount}
                                     </div>
                                 } />
