@@ -7,9 +7,8 @@ import Select from '@mui/material/Select';
 import { Avatar } from '@mui/material';
 
 export default function DropDown(props) {
-    const [paymentMode, setPaymentMode] = React.useState('');
     const handleChange = (event) => {
-        setPaymentMode(event.target.value);
+        props.setInput(event.target.value);
     };
 
     return (
@@ -19,12 +18,12 @@ export default function DropDown(props) {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={paymentMode}
+                    value={props.input}
                     label={props.category}
                     onChange={handleChange}
                 >
-                    {props.data.map((method, i) =>
-                        <MenuItem value={i}>
+                    {props.data.map(method =>
+                        <MenuItem key={method} value={method}>
                             {/* <Avatar style={{ backgroundColor: "red", margin: 5 }}>OP</Avatar> */}
                             {method}
                         </MenuItem>
