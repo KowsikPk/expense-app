@@ -5,7 +5,6 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -48,12 +47,12 @@ export default function ExpenseCard(props) {
                 subheader={props.data.date}
             />
 
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to Deletes">
-                    <DeleteIcon />
+            <CardActions disableSpacing >
+                <IconButton sx={{ borderRadius: 3, border: "1px solid", marginRight: 1 }}>
+                    <DeleteIcon sx={{ color: '#007FFF', }} />
                 </IconButton>
-                <IconButton aria-label="Edit">
-                    <EditIcon />
+                <IconButton sx={{ borderRadius: 3, border: "1px solid", }}>
+                    <EditIcon sx={{ color: '#007FFF' }} />
                 </IconButton>
                 <ExpandMore
                     expand={expanded}
