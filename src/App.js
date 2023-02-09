@@ -4,6 +4,8 @@ import PopupForm from './components/PopupForm'
 import ListExpense from './components/ListExpense'
 import Home from './Home'
 import db from './firebase.js'
+import { doc, onSnapshot, collection, query, where } from "firebase/firestore";
+
 import { SocialDistance } from '@mui/icons-material'
 export const App = () => {
     const [s, setTest] = useState([])
@@ -11,12 +13,18 @@ export const App = () => {
     const [expenseDetailsList, setExpenseDetailsList] = useState([
         { amount: '120', category: 'Debit/Loan', paymentMode: 'Other UPI', note: 'Some ', date: 'Feb 8, 2023' }])
 
-    useEffect(() => {
-        db.collection('test').onSnapShot(snapshot => {
-            console.log(setTest(snapshot.docs.map(doc => doc)))
-            setTest(snapshot.docs.map(doc => doc.data()))
-        })
-    }, [])
+
+
+    // useEffect(() => {
+    //     const q = query(collection(db, "expense-list"))
+    //     onSnapshot(q, (querySnapshot) => {
+    //         setExpenseDetailsList([querySnapshot.docs.map(doc => doc.data())]);
+    //     });
+    // }, [])
+
+
+    // console.log(s)
+    // console.log(expenseDetailsList)
     return (
         <div>
             {/* <Button variant="contained"

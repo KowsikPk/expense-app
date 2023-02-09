@@ -26,7 +26,7 @@ export const PopupForm = (props) => {
     };
 
 
-    const buttonState = ([amount, category, paymentMode, note, data].filter(v => v == '').length == 0) ?
+    const buttonState = ([amount, category, paymentMode, note, data].filter(v => v === '').length === 0) ?
         false : true
 
     const addDetails = () => {
@@ -36,6 +36,7 @@ export const PopupForm = (props) => {
         props.setExpenseDetailsList([...props.expenseDetailsList, expenseData])
         cleanInput()
         props.setOpen(false);
+        props.addExpenseToDB(expenseData)
     }
 
     return (
