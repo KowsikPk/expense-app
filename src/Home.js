@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ListItemText } from '@mui/material'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import PopupForm from './components/PopupForm'
+import AddForm from './components/AddForm'
 import ListExpense from './components/ListExpense'
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
@@ -11,19 +11,18 @@ import { serverTimestamp, doc, onSnapshot, collection, query, where, addDoc, ord
 
 const Home = () => {
     const [open, setOpen] = useState(false)
-    const [expenseDetailsList, setExpenseDetailsList] = useState([
-        // { amount: '120', category: 'Debit/Loan', paymentMode: 'Other UPI', note: 'Some ', date: 'Feb 8, 2023' },
-        // { amount: '120', category: 'Debit/Loan', paymentMode: 'Other UPI', note: 'Some ', date: 'Feb 8, 2023' },
-        // { amount: '120', category: 'Debit/Loan', paymentMode: 'Other UPI', note: 'Some ', date: 'Feb 8, 2023' },
-    ])
+    const [expenseDetailsList, setExpenseDetailsList] = useState([])
+
     let totalExpense = 0
     expenseDetailsList.map(a => {
-        totalExpense += parseInt(a.amount)
+        totalExpense += parseInt(a.expenseDetails.amount)
     })
+
     useEffect(() => {
         const dbOutput = query(collection(db, "expense-list"), orderBy('date', 'desc'))
         onSnapshot(dbOutput, (querySnapshot) => {
-            setExpenseDetailsList([...querySnapshot.docs.map(doc => doc.data())]);
+            // console.log(querySnapshot.docs.map(doc => ({ id: doc.id, expenseDetails: doc.data() })))
+            setExpenseDetailsList(querySnapshot.docs.map(doc => ({ id: doc.id, expenseDetails: doc.data() })));
         });
     }, [])
 
@@ -44,11 +43,11 @@ const Home = () => {
                 } />
 
                 <ListExpense expenseDetailsList={expenseDetailsList} />
-                <PopupForm
+                <AddForm
                     open={open} setOpen={setOpen}
-                    setExpenseDetailsList={setExpenseDetailsList}
                     expenseDetailsList={expenseDetailsList}
-                    addExpenseToDB={addExpenseToDB}
+                    addExpenseToDB={
+                        addExpenseToDB}
                 />
 
             </div >

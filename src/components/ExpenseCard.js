@@ -11,6 +11,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconsList from './IconsList';
+import db from '../firebase.js'
+import EditForm from './EditForm'
+import { serverTimestamp, doc, onSnapshot, collection, query, where, addDoc, orderBy, deleteDoc, updateDoc } from "firebase/firestore";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -24,36 +27,48 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function ExpenseCard(props) {
+    const [open, setOpen] = React.useState(false)
     const [expanded, setExpanded] = React.useState(false);
-
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-
+    const data = props.data.expenseDetails
+    const deleteData = () => {
+        deleteDoc(doc(db, "expense-list", props.data.id))
+    }
+    const updateData = (expenseData) => {
+        const docRef = (doc(db, "expense-list", props.data.id))
+        updateDoc(docRef, expenseData);
+    }
     return (
         <Card sx={{ width: 400 }}>
             <CardHeader
-                avatar={<IconsList category={props.data.category} />}
+                avatar={<IconsList category={data.category} />}
                 action={
                     <div style={{
                         display: 'flex', flexDirection: 'row', alignSelf: 'center'
                     }}>
                         <CardContent sx={{ fontSize: 20 }}>
-                            ₹ {props.data.amount}
+                            ₹ {data.amount}
                         </CardContent>
                     </div>
                 }
-                title={props.data.category}
-                subheader={props.data.date}
+                title={data.category}
+                subheader={data.date}
             />
 
             <CardActions disableSpacing >
-                <IconButton sx={{ borderRadius: 3, border: "1px solid", marginRight: 1 }}>
+                <IconButton onClick={deleteData} sx={{ borderRadius: 3, border: "1px solid", marginRight: 1 }}>
                     <DeleteIcon sx={{ color: '#007FFF', }} />
                 </IconButton>
-                <IconButton sx={{ borderRadius: 3, border: "1px solid", }}>
+                <IconButton sx={{ borderRadius: 3, border: "1px solid", }} onClick={() => setOpen(true)}>
                     <EditIcon sx={{ color: '#007FFF' }} />
                 </IconButton>
+                <EditForm
+                    open={open} setOpen={setOpen}
+                    expenseDetailsList={data}
+                    updateData={updateData}
+                />
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}
@@ -66,7 +81,7 @@ export default function ExpenseCard(props) {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography paragraph>
-                        {props.data.note}
+                        {data.note}
                     </Typography>
                 </CardContent>
             </Collapse>
