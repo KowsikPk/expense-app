@@ -9,7 +9,7 @@ export default function BasicDatePicker(props) {
     const getDate = (date) => {
         const dateStr = new Date(date).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })
         setValue(dateStr);
-        props.setDate(value)
+        props.setDate(dateStr)
     }
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>

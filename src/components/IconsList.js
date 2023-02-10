@@ -11,6 +11,7 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import PhonelinkIcon from '@mui/icons-material/Phonelink';
 import Box from '@mui/material/Box';
 function IconsList(props) {
+
     const icons = {
         Food: <RestaurantIcon sx={{ color: '#007FFF', fontSize: 40 }} />,
         Shopping: <ShoppingBagIcon sx={{ color: '#007FFF', fontSize: 40 }} />,

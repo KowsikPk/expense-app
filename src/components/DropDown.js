@@ -4,7 +4,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Avatar } from '@mui/material';
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
+
 
 export default function DropDown(props) {
     const handleChange = (event) => {
@@ -25,7 +26,7 @@ export default function DropDown(props) {
                     {props.data.map(method =>
                         <MenuItem key={method} value={method}>
                             {/* <Avatar style={{ backgroundColor: "red", margin: 5 }}>OP</Avatar> */}
-                            {method}
+                            {method}<CreditScoreIcon />
                         </MenuItem>
                     )}
                 </Select>

@@ -6,7 +6,6 @@ import ExpenseCard from './ExpenseCard';
 
 export default function ListExpense(props) {
     const data = props.expenseDetailsList
-    // console.log(data)
     return (
         <List sx={{ backgroundColor: 'gray', }}>
             {data.map((item, i) =>

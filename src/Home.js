@@ -7,22 +7,23 @@ import ListExpense from './components/ListExpense'
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 import db from './firebase.js'
-import { serverTimestamp, doc, onSnapshot, collection, query, where, addDoc, orderBy } from "firebase/firestore";
+import { serverTimestamp, onSnapshot, collection, query, addDoc, orderBy } from "firebase/firestore";
 
 const Home = () => {
     const [open, setOpen] = useState(false)
     const [expenseDetailsList, setExpenseDetailsList] = useState([])
 
     let totalExpense = 0
-    expenseDetailsList.map(a => {
+    expenseDetailsList.forEach(a => {
         totalExpense += parseInt(a.expenseDetails.amount)
     })
 
     useEffect(() => {
         const dbOutput = query(collection(db, "expense-list"), orderBy('date', 'desc'))
         onSnapshot(dbOutput, (querySnapshot) => {
-            // console.log(querySnapshot.docs.map(doc => ({ id: doc.id, expenseDetails: doc.data() })))
-            setExpenseDetailsList(querySnapshot.docs.map(doc => ({ id: doc.id, expenseDetails: doc.data() })));
+            setExpenseDetailsList(querySnapshot.docs.map(doc =>
+                ({ id: doc.id, expenseDetails: doc.data(), serverTimestamp: serverTimestamp })
+            ));
         });
     }, [])
 
@@ -46,8 +47,7 @@ const Home = () => {
                 <AddForm
                     open={open} setOpen={setOpen}
                     expenseDetailsList={expenseDetailsList}
-                    addExpenseToDB={
-                        addExpenseToDB}
+                    addExpenseToDB={addExpenseToDB}
                 />
 
             </div >
