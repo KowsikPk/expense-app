@@ -4,7 +4,7 @@ import MainPage from './MainPage'
 export const App = () => {
 
     return (
-        <div>
+        <div style={{ backgroundColor: 'red' }}>
             {/* <Home /> */}
             <MainPage />
         </div >
